@@ -1,0 +1,66 @@
+replicaCount: 1
+
+app:
+  name: ""
+  env: ""
+  component: ""
+
+image:
+  repository: ""
+  tag: "latest"
+  digest: ""
+  pullPolicy: IfNotPresent
+
+imagePullSecrets: []
+# Example:
+# imagePullSecrets:
+#   - name: ghcr-pull
+
+containerPort: 8080
+
+service:
+  type: ClusterIP
+  port: 80
+  targetPort: null
+  name: http
+
+ingress:
+  enabled: false
+  className: traefik
+  host: ""
+  annotations: {}
+  paths: []
+  # Example:
+  # paths:
+  #   - path: /api
+  #     pathType: Prefix
+  tls: []
+
+env: []
+
+resources: {}
+
+readinessProbe:
+  enabled: false
+  httpGet:
+    path: /health
+    port: 8080
+  initialDelaySeconds: 10
+  periodSeconds: 10
+  timeoutSeconds: 2
+  failureThreshold: 6
+
+livenessProbe:
+  enabled: false
+  httpGet:
+    path: /health
+    port: 8080
+  initialDelaySeconds: 30
+  periodSeconds: 10
+  timeoutSeconds: 2
+  failureThreshold: 6
+
+serviceAccount:
+  create: false
+  name: ""
+  annotations: {}

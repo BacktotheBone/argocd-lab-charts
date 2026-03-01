@@ -1,0 +1,39 @@
+app:
+  name: ""
+  env: ""
+  component: ""
+
+replicaCount: 1
+
+image:
+  repository: ""
+  tag: "latest"
+  digest: ""
+  pullPolicy: IfNotPresent
+
+imagePullSecrets: []
+serviceAccount:
+  create: false
+  name: ""
+  annotations: {}
+
+containerPort: 8080
+
+service:
+  type: ClusterIP
+  port: 80
+
+ingress:
+  enabled: true
+  className: traefik
+  host: ""
+  annotations: {}
+  paths:
+    - path: /
+      pathType: Prefix
+
+resources: {}
+
+env:
+  - name: ASPNETCORE_URLS
+    value: "http://+:8080"
